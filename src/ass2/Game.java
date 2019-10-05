@@ -35,44 +35,78 @@ public class Game
         System.out.println("Welcome " + playerName + "!!!!");
         while (isContinuePlay())
         {
+            showBufferList();
             gameTotal += randomMultiples.get(rng.getAValidIndex());
+            System.out.println("this system has Randomly chosen a multiple");
+            System.out.println("Now the game total is " + gameTotal);
             int userInput;
+            boolean isCorrectAction = false;
             do
             {
+                System.out.println("1.split\n2.merge");
                 userInput = Input.acceptAValidNumericInput("please select a option");
-            } while (userInput == Input.ERROR_INPUT);
-            switch (userInput)
-            {
-                case 1:
-                    split(gameTotal);
-                    break;
-                case 2:
-                    merge();
-                    break;
-                default:
-                    break;
-            }
+                switch (userInput)
+                {
+                    case 1:
+                        isCorrectAction = split(gameTotal);
+                        break;
+                    case 2:
+                        isCorrectAction = merge(gameTotal);
+                        break;
+                    default:
+                        System.out.println("you must chosen a number between 1 and 2!");
+                        break;
+                }
+            } while (!isCorrectAction);
         }
         System.exit(EXIT_SUCCESS);
     }
 
-    private void merge()
+    private boolean merge(int gameTotal)
     {
+        //check if this condition can be merged
+        boolean canMerge = false;
         for (Multiple multiple : buffer.getList())
         {
-            System.out.println("value: " + multiple.getValue());
+            if (multiple.getValue() == gameTotal)
+            {
+                canMerge = true;
+                break;
+            }
+        }
+        if (!canMerge)
+        {
+            System.out.println("Total number is " + gameTotal + ", you cannot merge");
+            return false;
         }
         int option;
         do
         {
+            showBufferList();
             option = Input.acceptAValidNumericInput("please select a buffer index");
-        } while (option <= 0 || option > buffer.getList().size());
-
+            if (buffer.getList().get(option - 1).getValue() != gameTotal)
+            {
+                System.out.println("you cannot select this multiple value");
+            }
+            if (option <= 0 || option > buffer.getList().size())
+            {
+                System.out.println("select index is out of bound, please select again");
+            }
+        } while (option <= 0 || option > buffer.getList().size() || !(buffer.getList().get(option - 1).getValue() == gameTotal));
+        this.gameTotal += buffer.getList().get(option - 1).getValue();
+        buffer.getList().remove(option - 1);
+        System.out.println("user has selected to merge the multiple value, now the buffer list is");
+        showBufferList();
+        System.out.println("the game total is " + this.gameTotal);
+        return true;
     }
 
-    private void split(int gameTotal)
+    private boolean split(int gameTotal)
     {
         buffer.addMultiPleToBuffer(gameTotal);
+        this.gameTotal -= gameTotal;
+        System.out.println("split complete!");
+        return true;
     }
 
     private ArrayList<Integer> getRandomMultiples()
@@ -87,6 +121,14 @@ public class Game
             System.exit(EXIT_ERROR);
         }
         return null;
+    }
+
+    private void showBufferList()
+    {
+        for (int i = 0; i < buffer.getList().size(); i++)
+        {
+            System.out.println("Multiple " + (i + 1) + ": " + buffer.getList().get(i).getValue());
+        }
     }
 
     private void trySetUserName(String userInputName)
@@ -107,6 +149,14 @@ public class Game
 
     private boolean isContinuePlay()
     {
+        if (buffer.isOverFlow())
+        {
+            System.out.println("Buffer is overflow, this game is over!");
+        }
+        if (gameTotal >= MAX_TOTAL_NUMBER)
+        {
+            System.out.println("Game total is greater than the limitation, this game is over!");
+        }
         return !(buffer.isOverFlow() || gameTotal >= MAX_TOTAL_NUMBER);
     }
 }
