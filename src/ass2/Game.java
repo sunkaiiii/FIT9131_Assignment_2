@@ -40,7 +40,7 @@ public class Game
             System.out.println("this system has Randomly chosen a multiple");
             System.out.println("Now the game total is " + gameTotal);
             int userInput;
-            boolean isCorrectAction = false;
+            boolean isGenerateNewValue = false;
             do
             {
                 System.out.println("1.split\n2.merge");
@@ -48,57 +48,38 @@ public class Game
                 switch (userInput)
                 {
                     case 1:
-                        isCorrectAction = split(gameTotal);
+                        isGenerateNewValue = split(gameTotal);
                         break;
                     case 2:
-                        isCorrectAction = merge(gameTotal);
+                        isGenerateNewValue = merge(gameTotal);
                         break;
                     default:
                         System.out.println("you must chosen a number between 1 and 2!");
                         break;
                 }
-            } while (!isCorrectAction);
+            } while (!isGenerateNewValue);
         }
         System.exit(EXIT_SUCCESS);
     }
 
     private boolean merge(int gameTotal)
     {
-        //check if this condition can be merged
-        boolean canMerge = false;
         for (Multiple multiple : buffer.getList())
         {
             if (multiple.getValue() == gameTotal)
             {
-                canMerge = true;
-                break;
+                System.out.println("Multiple value: " + multiple.getValue() + " has been merged");
+                this.gameTotal += multiple.getValue();
+                buffer.getList().remove(multiple);
+                System.out.println("merge operation has been completed, now the buffer list is");
+                showBufferList();
+                System.out.println("the game total is " + this.gameTotal);
+                return false;
             }
         }
-        if (!canMerge)
-        {
-            System.out.println("Total number is " + gameTotal + ", you cannot merge");
-            return false;
-        }
-        int option;
-        do
-        {
-            showBufferList();
-            option = Input.acceptAValidNumericInput("please select a buffer index");
-            if (buffer.getList().get(option - 1).getValue() != gameTotal)
-            {
-                System.out.println("you cannot select this multiple value");
-            }
-            if (option <= 0 || option > buffer.getList().size())
-            {
-                System.out.println("select index is out of bound, please select again");
-            }
-        } while (option <= 0 || option > buffer.getList().size() || !(buffer.getList().get(option - 1).getValue() == gameTotal));
-        this.gameTotal += buffer.getList().get(option - 1).getValue();
-        buffer.getList().remove(option - 1);
-        System.out.println("user has selected to merge the multiple value, now the buffer list is");
-        showBufferList();
-        System.out.println("the game total is " + this.gameTotal);
-        return true;
+        System.out.println("Total number is " + gameTotal + ", you cannot merge");
+        return false;
+
     }
 
     private boolean split(int gameTotal)
@@ -125,9 +106,16 @@ public class Game
 
     private void showBufferList()
     {
+        if (buffer.getList().size() == 0)
+        {
+            return;
+        }
+        String format = "%8s%10s\n";
+        System.out.println(String.format(format, "Index", "Value"));
+        System.out.println(String.format(format, "----", "----"));
         for (int i = 0; i < buffer.getList().size(); i++)
         {
-            System.out.println("Multiple " + (i + 1) + ": " + buffer.getList().get(i).getValue());
+            System.out.println(String.format(format, "" + (i + 1), "" + buffer.getList().get(i).getValue()));
         }
     }
 
