@@ -57,7 +57,15 @@ public class Game
                         System.out.println("you must chosen a number between 1 and 2!");
                         break;
                 }
-            } while (!isGenerateNewValue);
+            } while (!isGenerateNewValue&&isContinuePlay());
+        }
+        try
+        {
+            Input.writeFinalResultToFile(playerName+" has got "+gameTotal+" score");
+        } catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Write File error");
         }
         System.exit(EXIT_SUCCESS);
     }

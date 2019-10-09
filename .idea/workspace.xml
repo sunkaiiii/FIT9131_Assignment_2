@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45dd962a-b918-4059-a52a-67213cd44f9a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ass2/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Buffer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ass2/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ass2/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Input.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +76,12 @@
       <workItem from="1570164049050" duration="6260000" />
       <workItem from="1570170358001" duration="108000" />
       <workItem from="1570252293129" duration="2944000" />
-      <workItem from="1570333736317" duration="1524000" />
+      <workItem from="1570333736317" duration="1741000" />
+      <workItem from="1570587069779" duration="1994000" />
+      <workItem from="1570591464798" duration="227000" />
+      <workItem from="1570594010184" duration="870000" />
+      <workItem from="1570596581196" duration="319000" />
+      <workItem from="1570610333920" duration="668000" />
     </task>
     <servers />
   </component>
