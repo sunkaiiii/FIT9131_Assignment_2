@@ -6,11 +6,15 @@ public class Buffer
 {
     private ArrayList<Multiple> multiples;
     private int maxElements;
-    private static final int MAX_NUMBER = 5;
 
     public Buffer()
     {
-        maxElements = MAX_NUMBER;
+        this(5);
+    }
+
+    public Buffer(int newMaxElement)
+    {
+        maxElements = newMaxElement;
         multiples = new ArrayList<>();
     }
 
@@ -21,7 +25,7 @@ public class Buffer
 
     public boolean isOverFlow()
     {
-        return multiples.size() > MAX_NUMBER;
+        return multiples.size() > maxElements;
     }
 
     public ArrayList<Multiple> getList()

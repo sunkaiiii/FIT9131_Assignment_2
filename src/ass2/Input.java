@@ -1,8 +1,6 @@
 package ass2;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -16,41 +14,17 @@ import java.util.Scanner;
 public class Input
 {
 
-    private static final String MULTIPLE_TEXT_FILE_NAME = "C:\\Users\\sunkai\\Documents\\GitHub\\Ass2\\src\\ass2\\multiples.txt";
-    private static final String SAVE_FILE_NAME="outcome.txt";
+
     public static final int ERROR_INPUT = Integer.MIN_VALUE;
 
     /**
      * This method response for clear the console display by printing many empty lines
      */
-    public static void clearDisplay()
+    public void clearDisplay()
     {
         for (int i = 0; i < 20; i++)
         {
             System.out.println();
-        }
-    }
-
-    public static ArrayList<Integer> readMultipleFromFiles() throws IOException, NumberFormatException
-    {
-        try (FileReader fileReader = new FileReader(MULTIPLE_TEXT_FILE_NAME))
-        {
-            Scanner scanner = new Scanner(fileReader);
-            String[] numberArray = scanner.nextLine().split(",");
-            ArrayList<Integer> result = new ArrayList<>();
-            for (String singleNum : numberArray)
-            {
-                result.add(Integer.parseInt(singleNum));
-            }
-            return result;
-        }
-    }
-
-    public static void writeFinalResultToFile(String writeInformation)throws IOException
-    {
-        try(PrintWriter printWriter=new PrintWriter(SAVE_FILE_NAME))
-        {
-            printWriter.println(writeInformation);
         }
     }
 
@@ -62,7 +36,7 @@ public class Input
      * @param displayMessage A string message telling the user what input is expected
      * @return A single double value which is entered by the user
      */
-    public static String acceptUserInput(String displayMessage)
+    public String acceptUserInput(String displayMessage)
     {
         System.out.println(displayMessage);
         Scanner scanner = new Scanner(System.in);
@@ -71,7 +45,7 @@ public class Input
         return userInput.trim();
     }
 
-    private static boolean checkUserInputIsNumeric(String userInput)
+    private boolean checkUserInputIsNumeric(String userInput)
     {
         if (userInput == null || userInput.length() == 0)
         {
@@ -96,7 +70,7 @@ public class Input
      * @param displayMessage
      * @return A valid integer which is converted by the string that is inputted by the user, or an Integer.MIN_VALUE value if the user has inputted a wrong string.
      */
-    public static int acceptAValidNumericInput(String displayMessage)
+    public int acceptAValidNumericInput(String displayMessage)
     {
         String userInput = acceptUserInput(displayMessage);
         int result = ERROR_INPUT;
@@ -112,7 +86,7 @@ public class Input
      *
      * @param number a number of how many lines would the console will output
      */
-    public static void displayManyLines(int number)
+    public void displayManyLines(int number)
     {
         int actuallyNumber;
         if (number < 0)
