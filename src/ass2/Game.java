@@ -8,7 +8,6 @@ public class Game
     private String playerName;
     private int gameTotal;
     private ArrayList<Buffer> multipleList;
-    private Buffer buffer;
 
     private final String INPUT_FILE = "multiples.txt";
     private final String OUTPUT_FILE = "output.txt";
@@ -17,7 +16,6 @@ public class Game
     {
         playerName = "";
         gameTotal = 0;
-        buffer = new Buffer();
         multipleList = new ArrayList<>();
         multipleList.add(new Buffer(5));
         multipleList.add(new Buffer(3));
@@ -41,7 +39,6 @@ public class Game
         RNG rng = new RNG(0, randomMultiples.size());
         while (isContinuePlay(tempGameTotal))
         {
-            showBufferList(tempGameTotal);
             tempGameTotal += randomMultiples.get(rng.getAValidIndex());
             System.out.println("this system has Randomly chosen a multiple");
             System.out.println("Now the game total is " + tempGameTotal);
@@ -49,30 +46,55 @@ public class Game
             boolean isGenerateNewValue = false;
             do
             {
-                System.out.println("1.split\n2.merge");
+                showBufferList(tempGameTotal);
+                System.out.println("1.split right\n2.Merge Right\n3.Split Left\n4.Merge Left");
                 userInput = new Input().acceptAValidNumericInput("please select a option");
                 switch (userInput)
                 {
                     case 1:
-                        isGenerateNewValue = true;
-                        tempGameTotal = split(tempGameTotal);
+                        if (split(multipleList.get(0), tempGameTotal))
+                        {
+                            isGenerateNewValue = true;
+                            tempGameTotal = 0;
+                        } else
+                        {
+                            isGenerateNewValue = false;
+                        }
                         break;
                     case 2:
                         isGenerateNewValue = false;
-                        tempGameTotal = merge(tempGameTotal);
+                        tempGameTotal = merge(multipleList.get(0), tempGameTotal);
                         break;
+                    case 3:
+                        if (split(multipleList.get(1), tempGameTotal))
+                        {
+                            isGenerateNewValue = true;
+                            tempGameTotal = 0;
+                        } else
+                        {
+                            isGenerateNewValue = false;
+                        }
+                        break;
+                    case 4:
+                        isGenerateNewValue = false;
+                        tempGameTotal = merge(multipleList.get(1), tempGameTotal);
                     default:
-                        System.out.println("you must chosen a number between 1 and 2!");
+                        System.out.println("you must chosen a number between 1 and 4!");
                         break;
                 }
             } while (!isGenerateNewValue && isContinuePlay(tempGameTotal));
         }
-        new FileIO(OUTPUT_FILE).writeContentToFile(playerName + " has got " + tempGameTotal + " score");
+        if(tempGameTotal >= getGameTotal())
+        {
+            new FileIO(OUTPUT_FILE).writeContentToFile(playerName + " has got " + tempGameTotal + " score");
+            System.out.println("The result of this game has been record in output.txt!");
+        }
+
     }
 
     private void tryToSetGameMaxTotal()
     {
-        int newMaxTotal = 0;
+        int newMaxTotal;
         do
         {
             newMaxTotal = new Input().acceptAValidNumericInput("please insert a game total");
@@ -89,35 +111,52 @@ public class Game
         return (newGameTotal >= 32 && newGameTotal % 8 == 0);
     }
 
-    private int merge(int tempGameTotal)
+    private int merge(Buffer buffer, int tempGameTotal)
     {
-        boolean merged = false;
-        for (Multiple multiple : buffer.getList())
-        {
-            if (multiple.getValue() == tempGameTotal)
-            {
-                System.out.println("Multiple value: " + multiple.getValue() + " has been merged");
-                buffer.getList().remove(multiple);
-                System.out.println("merge operation has been completed, now the buffer list is");
-                showBufferList(tempGameTotal);
-                System.out.println("the game total is " + tempGameTotal);
-                tempGameTotal += multiple.getValue();
-                merged = true;
-            }
-        }
-        if (!merged)
+        Multiple mergeMultiple = tryToGetAMergeMultiple(buffer, tempGameTotal);
+        if (mergeMultiple == null)
         {
             System.out.println("Total number is " + tempGameTotal + ", you cannot merge");
+        } else
+        {
+            tempGameTotal += mergeMultiple.getValue();
+            System.out.println("Multiple value: " + mergeMultiple.getValue() + " has been merged");
+            buffer.getList().remove(mergeMultiple);
+            System.out.println("merge operation has been completed, now the buffer list is");
+            showBufferList(tempGameTotal);
+            System.out.println("the game total is " + tempGameTotal);
         }
         return tempGameTotal;
 
     }
 
-    private int split(int gameTotal)
+    private Multiple tryToGetAMergeMultiple(Buffer buffer, int tempGameTotal)
     {
-        buffer.addMultiPleToBuffer(gameTotal);
-        System.out.println("split complete!");
-        return 0;
+        Multiple result = null;
+        for (Multiple multiple : buffer.getList())
+        {
+            if (multiple.getValue() == tempGameTotal)
+            {
+                result = multiple;
+                break;
+            }
+        }
+        return result;
+    }
+
+    private boolean split(Buffer buffer, int gameTotal)
+    {
+        boolean splitSuccess = false;
+        if (buffer.isFull())
+        {
+            System.out.println("this buffer is full, you cannot split to this");
+        } else
+        {
+            buffer.addMultiPleToBuffer(gameTotal);
+            System.out.println("split complete!");
+            splitSuccess = true;
+        }
+        return splitSuccess;
     }
 
     private ArrayList<Integer> getRandomMultiples()
@@ -187,10 +226,10 @@ public class Game
         Buffer right = multipleList.get(1);
         for (int i = 0; i < maxSize; i++)
         {
-            String indexString = (i + 1) + "";
-            String leftValue = "" + (i < left.getList().size() ? left.getList().get(i) : "");
-            String rightValue = "" + (i < right.getList().size() ? right.getList().get(i) : "");
-            System.out.println(String.format(format, leftValue.equals("") ? "" : indexString, leftValue, tempGameTotal, rightValue.equals("") ? "" : indexString, rightValue));
+            String indexString = (i + 1) + ": ";
+            String leftValue = "" + (i < left.getList().size() ? left.getList().get(i).getValue() : "");
+            String rightValue = "" + (i < right.getList().size() ? right.getList().get(i).getValue() : "");
+            System.out.println(String.format(format, leftValue.equals("") ? "" : indexString, leftValue, i == maxSize / 2 ? tempGameTotal : "", rightValue.equals("") ? "" : indexString, rightValue));
         }
     }
 
@@ -212,23 +251,33 @@ public class Game
 
     private boolean isContinuePlay(int tempGameTotal)
     {
-        if (buffer.isOverFlow())
+        boolean isOver = true;
+        for (int i = 0; i < multipleList.size(); i++)
         {
-            System.out.println("Buffer is overflow, this game is over!");
+            Buffer buffer = multipleList.get(i);
+            if (!buffer.isFull() || tryToGetAMergeMultiple(buffer, tempGameTotal) != null)
+            {
+                isOver = false;
+                break;
+            }
         }
-        if (tempGameTotal >= getGameTotal())
+        if (isOver)
         {
+            System.out.println("all buffer is full, and there is no multiple can merge to total number. This game is over");
+        } else if (tempGameTotal >= getGameTotal())
+        {
+            isOver = true;
             System.out.println("Game total is greater than the limitation, this game is over!");
         }
-        return !(buffer.isOverFlow() || tempGameTotal >= getGameTotal());
+        return !isOver;
     }
 
-    public int getGameTotal()
+    private int getGameTotal()
     {
         return gameTotal;
     }
 
-    public void setGameTotal(int gameTotal)
+    private void setGameTotal(int gameTotal)
     {
         this.gameTotal = gameTotal;
     }

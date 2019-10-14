@@ -1,4 +1,5 @@
 package ass2;
+
 /**
  * Write a description of class RNG here.
  *

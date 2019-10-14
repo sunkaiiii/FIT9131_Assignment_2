@@ -23,9 +23,9 @@ public class Buffer
         multiples.add(new Multiple(value));
     }
 
-    public boolean isOverFlow()
+    public boolean isFull()
     {
-        return multiples.size() > maxElements;
+        return multiples.size() >= maxElements;
     }
 
     public ArrayList<Multiple> getList()

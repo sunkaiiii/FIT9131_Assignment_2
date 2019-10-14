@@ -1,6 +1,5 @@
 package ass2;
 
-import java.io.*;
 import java.util.Scanner;
 
 
