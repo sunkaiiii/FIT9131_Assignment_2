@@ -6,21 +6,48 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * The FileIO class responses for reading or writing information from or to a file.
+ *
+ * @author Kai.Sun
+ * @version 14/10/2019
+ */
+
 public class FileIO
 {
     private final String filename;
 
+    /**
+     * Default constructor
+     */
     public FileIO()
     {
         this("unknown");
     }
 
+    /**
+     * Non-default constructor
+     * @param newInputFilename the name of the file that wants the FileIO object  to use
+     */
     public FileIO(String newInputFilename)
     {
         filename = newInputFilename;
     }
 
-    public String readMultipleFromFiles() throws IOException, NumberFormatException
+    /**
+     * The accessor of the file name
+     * @return the filename
+     */
+    public String getFilename()
+    {
+        return filename;
+    }
+
+    /**
+     * Read the content in the file as a String object.
+     * @return the content in the file, if errors are happened, return an empty String
+     */
+    public String readMultipleFromFiles()
     {
         String result = "";
         try
@@ -54,6 +81,10 @@ public class FileIO
         return result;
     }
 
+    /**
+     * Write information to the file
+     * @param writeInformation the content that wants the FileIO object to write
+     */
     public void writeContentToFile(String writeInformation)
     {
         try
