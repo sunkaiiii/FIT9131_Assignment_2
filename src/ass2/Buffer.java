@@ -21,7 +21,7 @@ public class Buffer
 
     public boolean isOverFlow()
     {
-        return multiples.size() > MAX_NUMBER;
+        return multiples.size() >= MAX_NUMBER;
     }
 
     public ArrayList<Multiple> getList()

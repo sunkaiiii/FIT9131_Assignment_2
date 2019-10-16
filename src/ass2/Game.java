@@ -92,8 +92,27 @@ public class Game
 
     }
 
+    private Multiple tryToGetAMergeMultiple(int gameTotal)
+    {
+        Multiple result = null;
+        for (Multiple multiple : buffer.getList())
+        {
+            if (multiple.getValue() == gameTotal)
+            {
+                result = multiple;
+                break;
+            }
+        }
+        return result;
+    }
+
     private boolean split(int gameTotal)
     {
+        if (buffer.getList().size()==5)
+        {
+            System.out.println("The buffer is full, you cannot merge");
+            return false;
+        }
         buffer.addMultiPleToBuffer(gameTotal);
         this.gameTotal -= gameTotal;
         System.out.println("split complete!");
@@ -147,14 +166,21 @@ public class Game
 
     private boolean isContinuePlay()
     {
+        boolean isOver = false;
         if (buffer.isOverFlow())
         {
-            System.out.println("Buffer is overflow, this game is over!");
+            System.out.println("Buffer reaches the size limitation");
+            if (tryToGetAMergeMultiple(gameTotal) == null)
+            {
+                System.out.println("There is no multiple that can merge,the game is over");
+                isOver = true;
+            }
         }
         if (gameTotal >= MAX_TOTAL_NUMBER)
         {
             System.out.println("Game total is greater than the limitation, this game is over!");
+            isOver = true;
         }
-        return !(buffer.isOverFlow() || gameTotal >= MAX_TOTAL_NUMBER);
+        return !isOver;
     }
 }
