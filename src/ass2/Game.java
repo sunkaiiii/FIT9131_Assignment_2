@@ -38,7 +38,7 @@ public class Game
         gameTotal = 0;
         for (Buffer buffer : multipleList)
         {
-            buffer.getMultiples().clear();
+            buffer.initBufferValues();
         }
     }
 
@@ -79,7 +79,7 @@ public class Game
             boolean isGenerateNewValue = false; //this is a flag for whether the user is split a multiple
             while (!isGenerateNewValue && isContinuePlay(tempGameTotal))
             {
-                showBufferList(tempGameTotal);
+                displayGame(tempGameTotal);
                 System.out.println("1.split right →\n2.Merge Right ←←\n3.Split Left ←\n4.Merge Left →→");
                 int userInput;
                 try
@@ -187,14 +187,16 @@ public class Game
         if (mergeMultiple == null)
         {
             System.out.println("Total number is " + tempGameTotal + ", you cannot merge");
-        } else //If find one, merge its value to the temporary game total.
+        } else if (buffer.removeMultipleFromBuffer(mergeMultiple)) //Before the merge action, delete the multiple object from the buffer list.) //If find one, merge its value to the temporary game total.
         {
             tempGameTotal += mergeMultiple.getValue();
             System.out.println("Multiple value: " + mergeMultiple.getValue() + " has been merged");
-            buffer.getMultiples().remove(mergeMultiple); //After the merge action, delete the multiple object from the buffer list.
             System.out.println("merge operation has been completed, now the buffer list is");
-            showBufferList(tempGameTotal);
+            displayGame(tempGameTotal);
             System.out.println("the game total is " + tempGameTotal);
+        } else
+        {
+            System.out.println("Merge error, please try again");
         }
         return tempGameTotal;
 
@@ -298,7 +300,7 @@ public class Game
                 result = candidateArrays.get(inputNumber - 1);
             }
 
-        }catch (NumberFormatException e)
+        } catch (NumberFormatException e)
         {
             System.out.println("Content is incorrect");
         }
@@ -307,15 +309,16 @@ public class Game
 
     /**
      * show the temporary information of the buffer list
+     *
      * @param tempGameTotal The temporary value of the game total.
      */
-    public void showBufferList(int tempGameTotal)
+    public void displayGame(int tempGameTotal)
     {
         boolean listIsAllEmpty = true;
         int maxSize = 0;
         for (Buffer buffer : multipleList)
         {
-            if (buffer.getMultiples().size() != 0)
+            if (!buffer.isEmpty())
             {
                 listIsAllEmpty = false;
                 maxSize = Math.max(maxSize, buffer.getMultiples().size()); //ensure the max number of size in buffers.
@@ -325,27 +328,27 @@ public class Game
         {
             return; //if all buffers are empty, then show nothing.
         }
-        String format = "%8s %s %8s %8s %s\n"; //format the output string, makes it be more readable.
-        System.out.println(String.format(format, "Index", "Value", "Game Total", "Index", "Value"));
-        System.out.println(String.format(format, "--------", "-----", "----------------", "--------", "-----"));
+        String format = "%20s %8s %20s\n"; //format the output string, makes it be more readable.
+        System.out.println(String.format(format, "", "Game Total", ""));
+        System.out.println(String.format(format, "-----------------", "-----", "-----------------"));
         Buffer left = multipleList.get(0);
         Buffer right = multipleList.get(1);
         for (int i = 0; i < maxSize; i++) //The times for looping is decided by the buffer that has a higher amount of Multiple objects.
         {
-            String indexString = (i + 1) + ": ";
-            String leftValue = "" + (i < left.getMultiples().size() ? left.getMultiples().get(i).getValue() : ""); //If the current index is out of bound, then this line will show an empty String.
-            String rightValue = "" + (i < right.getMultiples().size() ? right.getMultiples().get(i).getValue() : ""); //If the current index is out of bound, then this line will show an empty String.
+            String leftValue = "" + (i < left.getMultiples().size() ? left.displayBuffer(i) : ""); //If the current index is out of bound, then this line will show an empty String.
+            String rightValue = "" + (i < right.getMultiples().size() ? right.displayBuffer(i) : ""); //If the current index is out of bound, then this line will show an empty String.
             String totalValue = "";
             if (i == maxSize / 2) //If there is the centre of the loop, then show the number of the game total.
             {
                 totalValue = "| " + tempGameTotal + " |";
             }
-            System.out.println(String.format(format, leftValue.equals("") ? "" : indexString, leftValue, totalValue, rightValue.equals("") ? "" : indexString, rightValue));
+            System.out.println(String.format(format, leftValue, totalValue, rightValue));
         }
     }
 
     /**
      * Try to set an user name if the use inputs a correct user name
+     *
      * @param userInputName the name input by the user.
      */
     private void trySetUserName(String userInputName)
@@ -361,6 +364,7 @@ public class Game
 
     /**
      * Judge whether it is a correct user name
+     *
      * @param playerName An user name input by the user.
      * @return Whether it is a correct user name or not.
      */
@@ -372,6 +376,7 @@ public class Game
 
     /**
      * Judge whether this game is over or not
+     *
      * @param tempGameTotal The temporary value of the game total
      * @return if the game cannot continue to play, return false, if can, return true.
      */
@@ -401,6 +406,7 @@ public class Game
 
     /**
      * The accessor of the playerName
+     *
      * @return the value of the player name
      */
     public String getPlayerName()
@@ -410,6 +416,7 @@ public class Game
 
     /**
      * Mutator of the player name
+     *
      * @param newPlayerName the new value of the player name
      */
     public void setPlayerName(String newPlayerName)
@@ -419,6 +426,7 @@ public class Game
 
     /**
      * The accessor of the multiple list
+     *
      * @return the value of the multiple list
      */
     public ArrayList<Buffer> getMultipleList()
@@ -428,6 +436,7 @@ public class Game
 
     /**
      * Mutator of the multiple list
+     *
      * @param newMultipleList the new value of the multiple list
      */
     public void setMultipleList(ArrayList<Buffer> newMultipleList)
@@ -437,6 +446,7 @@ public class Game
 
     /**
      * The accessor of the game total
+     *
      * @return the value of the game total
      */
     public int getGameTotal()
@@ -446,6 +456,7 @@ public class Game
 
     /**
      * The mutator of the game total
+     *
      * @param newGameTotal the new value of the game total
      */
     public void setGameTotal(int newGameTotal)

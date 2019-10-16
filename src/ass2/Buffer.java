@@ -23,6 +23,7 @@ public class Buffer
 
     /**
      * Non-default constructor
+     *
      * @param newMaxElement the max number of elements of the buffer
      */
     public Buffer(int newMaxElement)
@@ -33,15 +34,22 @@ public class Buffer
 
     /**
      * Judge whether the buffer is full or not.
+     *
      * @return true means the buffer is full, false is not full.
      */
     public boolean isFull()
     {
-        return getMultiples().size() >= getMaxElements();
+        return multiples.size() >= getMaxElements();
+    }
+
+    public boolean isEmpty()
+    {
+        return multiples.isEmpty();
     }
 
     /**
      * The accessor of the multiple list
+     *
      * @return the list of multiples
      */
     public ArrayList<Multiple> getMultiples()
@@ -49,8 +57,30 @@ public class Buffer
         return multiples;
     }
 
+    public void initBufferValues()
+    {
+        multiples.clear();
+    }
+
+    public boolean addMultipleToBuffer(Multiple newMultiple)
+    {
+        boolean result = false;
+        if (multiples.size() < maxElements)
+        {
+            multiples.add(newMultiple);
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean removeMultipleFromBuffer(Multiple existMultiple)
+    {
+        return multiples.remove(existMultiple);
+    }
+
     /**
      * The mutator of the multiple list
+     *
      * @param newMultiples the new value of the multiple list.
      */
     public void setMultiples(ArrayList<Multiple> newMultiples)
@@ -60,6 +90,7 @@ public class Buffer
 
     /**
      * The accessor of the value of the max element
+     *
      * @return the value of the max elements that the buffer can contain.
      */
     public int getMaxElements()
@@ -69,10 +100,26 @@ public class Buffer
 
     /**
      * The mutator of the value of the max element.
+     *
      * @param newMaxElements new value of the max element.
      */
     public void setMaxElements(int newMaxElements)
     {
         this.maxElements = newMaxElements;
+    }
+
+    public String displayBuffer()
+    {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < multiples.size(); i++)
+        {
+            stringBuffer.append(displayBuffer(i));
+        }
+        return stringBuffer.toString();
+    }
+
+    public String displayBuffer(int index)
+    {
+        return "Index: " + (index + 1) + multiples.get(index).displayMultiple()+" ";
     }
 }

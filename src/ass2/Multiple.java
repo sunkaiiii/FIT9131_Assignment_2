@@ -36,4 +36,9 @@ public class Multiple
         return value;
     }
 
+    public String displayMultiple()
+    {
+        return "Value: "+value;
+    }
+
 }
