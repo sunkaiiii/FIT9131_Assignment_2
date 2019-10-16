@@ -11,6 +11,8 @@ public class Game
     private static final int EXIT_SUCCESS = 0;
     private static final int EXIT_ERROR = 1;
     private static final int MAX_TOTAL_NUMBER = 255;
+    private static final String MULTIPLE_TEXT_FILE_NAME = "multiples.txt";
+    private static final String SAVE_FILE_NAME = "outcome.txt";
 
     public Game()
     {
@@ -57,11 +59,11 @@ public class Game
                         System.out.println("you must chosen a number between 1 and 2!");
                         break;
                 }
-            } while (!isGenerateNewValue&&isContinuePlay());
+            } while (!isGenerateNewValue && isContinuePlay());
         }
         try
         {
-            Input.writeFinalResultToFile(playerName+" has got "+gameTotal+" score");
+            new FileIO(SAVE_FILE_NAME).writeFinalResultToFile(playerName + " has got " + gameTotal + " score");
         } catch (IOException e)
         {
             System.out.println(e.getMessage());
@@ -102,7 +104,7 @@ public class Game
     {
         try
         {
-            return Input.readMultipleFromFiles();
+            return new FileIO(MULTIPLE_TEXT_FILE_NAME).readMultipleFromFiles();
         } catch (IOException e)
         {
             System.out.println("read multiple file error");

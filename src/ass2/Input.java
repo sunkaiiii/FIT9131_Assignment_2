@@ -1,8 +1,5 @@
 package ass2;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -15,9 +12,6 @@ import java.util.Scanner;
  */
 public class Input
 {
-
-    private static final String MULTIPLE_TEXT_FILE_NAME = "C:\\Users\\sunkai\\Documents\\GitHub\\Ass2\\src\\ass2\\multiples.txt";
-    private static final String SAVE_FILE_NAME="outcome.txt";
     public static final int ERROR_INPUT = Integer.MIN_VALUE;
 
     /**
@@ -31,28 +25,6 @@ public class Input
         }
     }
 
-    public static ArrayList<Integer> readMultipleFromFiles() throws IOException, NumberFormatException
-    {
-        try (FileReader fileReader = new FileReader(MULTIPLE_TEXT_FILE_NAME))
-        {
-            Scanner scanner = new Scanner(fileReader);
-            String[] numberArray = scanner.nextLine().split(",");
-            ArrayList<Integer> result = new ArrayList<>();
-            for (String singleNum : numberArray)
-            {
-                result.add(Integer.parseInt(singleNum));
-            }
-            return result;
-        }
-    }
-
-    public static void writeFinalResultToFile(String writeInformation)throws IOException
-    {
-        try(PrintWriter printWriter=new PrintWriter(SAVE_FILE_NAME))
-        {
-            printWriter.println(writeInformation);
-        }
-    }
 
     /**
      * Method which displays a message to the user to enter an DOUBLE input
