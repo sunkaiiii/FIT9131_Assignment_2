@@ -2,6 +2,8 @@ package ass2;
 
 /**
  * Multiple stores the value for a game.
+ * @author Kai.Sun
+ * @version 23/10/2019
  */
 public class Multiple
 {
@@ -36,6 +38,10 @@ public class Multiple
         return value;
     }
 
+    /**
+     * Dispaly the information of this multiple.
+     * @return A string contained the information of the object.
+     */
     public String displayMultiple()
     {
         return "Value: "+value;

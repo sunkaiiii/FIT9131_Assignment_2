@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -52,7 +54,7 @@ public class FileIO
         String result = "";
         try
         {
-
+            System.out.println(Paths.get("").toAbsolutePath());
             FileReader fileReader = new FileReader(filename);
             try
             {

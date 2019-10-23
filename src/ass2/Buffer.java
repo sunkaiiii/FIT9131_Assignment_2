@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The buffer class stores the multiple objects for a game
  *
  * @author Kai.Sun
- * @version 14/10/2019
+ * @version 23/10/2019
  */
 public class Buffer
 {
@@ -108,6 +108,10 @@ public class Buffer
         this.maxElements = newMaxElements;
     }
 
+    /**
+     * Display the whole information in the ArrayList
+     * @return A string contains all information in the ArrayList
+     */
     public String displayBuffer()
     {
         StringBuffer stringBuffer = new StringBuffer();
@@ -118,8 +122,30 @@ public class Buffer
         return stringBuffer.toString();
     }
 
+    /**
+     * Display the specific information of the buffer in the ArrayList
+     * @param index the index of the current ArrayList in the Buffer.
+     * @return the information in the specific index of the Buffer if the index is correct, otherwise, return Unknown
+     */
     public String displayBuffer(int index)
     {
-        return "Index: " + (index + 1) + multiples.get(index).displayMultiple()+" ";
+        final String result;
+        if (index>=multiples.size() || index < 0)
+        {
+            result = "Unknown";
+        }else
+        {
+            result = multiples.get(index).displayMultiple()+" ";
+        }
+        return result;
+    }
+
+    /**
+     * Get the current remain capacity of the Buffer
+     * @return the number of the remain available capacity.
+     */
+    public int getRemainCapacity()
+    {
+        return getMaxElements()-getMultiples().size();
     }
 }

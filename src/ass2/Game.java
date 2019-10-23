@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The game class responses for starting a new game and stores the username
  *
  * @author Kai.Sun
- * @version 14/10/2019
+ * @version 22/10/2019
  */
 public class Game
 {
@@ -329,7 +329,7 @@ public class Game
             return; //if all buffers are empty, then show nothing.
         }
         String format = "%20s %8s %20s\n"; //format the output string, makes it be more readable.
-        System.out.println(String.format(format, "", "Game Total", ""));
+        System.out.println(String.format(format, "Buffer left   ", "Game Total", "Buffer right   "));
         System.out.println(String.format(format, "-----------------", "-----", "-----------------"));
         Buffer left = multipleList.get(0);
         Buffer right = multipleList.get(1);
@@ -344,6 +344,8 @@ public class Game
             }
             System.out.println(String.format(format, leftValue, totalValue, rightValue));
         }
+        System.out.println(String.format(format, "-----------------", "-----", "-----------------"));
+        System.out.println(String.format(format,"Buffer left remain: "+left.getRemainCapacity(),"","Buffer right remain: "+right.getRemainCapacity()));
     }
 
     /**

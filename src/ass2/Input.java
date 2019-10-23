@@ -23,10 +23,8 @@ public class Input
      */
     public String acceptUserInput(String displayMessage)
     {
-        System.out.println(displayMessage);
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
-        scanner.close();
         return userInput.trim();
     }
 

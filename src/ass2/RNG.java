@@ -4,7 +4,7 @@ package ass2;
  * RNG class responses for generating random numbers in a specific range.
  *
  * @author Kai.Sun
- * @version 14/10/2019
+ * @version 23/10/2019
  */
 public class RNG
 {
