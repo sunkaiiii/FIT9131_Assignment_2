@@ -2,6 +2,7 @@ package ass2;
 
 /**
  * Multiple stores the value for a game.
+ *
  * @author Kai.Sun
  * @version 23/10/2019
  */
@@ -12,6 +13,7 @@ public class Multiple
 
     /**
      * Non-default constructor
+     *
      * @param newValue the initial value of the multiple object
      */
     public Multiple(int newValue)
@@ -21,6 +23,7 @@ public class Multiple
 
     /**
      * The mutator of the value
+     *
      * @param newValue The new value
      */
     public void setValue(int newValue)
@@ -31,6 +34,7 @@ public class Multiple
 
     /**
      * The accessor of the value field
+     *
      * @return the value of the value field
      */
     public int getValue()
@@ -40,11 +44,12 @@ public class Multiple
 
     /**
      * Dispaly the information of this multiple.
+     *
      * @return A string contained the information of the object.
      */
     public String displayMultiple()
     {
-        return "Value: "+value;
+        return "Value: " + value;
     }
 
 }

@@ -29,6 +29,7 @@ public class FileIO
 
     /**
      * Non-default constructor
+     *
      * @param newInputFilename the name of the file that wants the FileIO object  to use
      */
     public FileIO(String newInputFilename)
@@ -38,6 +39,7 @@ public class FileIO
 
     /**
      * The accessor of the file name
+     *
      * @return the filename
      */
     public String getFilename()
@@ -47,6 +49,7 @@ public class FileIO
 
     /**
      * Read the content in the file as a String object.
+     *
      * @return the content in the file, if errors are happened, return an empty String
      */
     public String readMultipleFromFiles()
@@ -64,7 +67,7 @@ public class FileIO
                 {
                     stringBuffer.append(scanner.nextLine()).append("\n");
                 }
-                stringBuffer.delete(stringBuffer.length()-1,stringBuffer.length());
+                stringBuffer.delete(stringBuffer.length() - 1, stringBuffer.length());
                 result = stringBuffer.toString();
             } finally
             {
@@ -85,6 +88,7 @@ public class FileIO
 
     /**
      * Write information to the file
+     *
      * @param writeInformation the content that wants the FileIO object to write
      */
     public void writeContentToFile(String writeInformation)

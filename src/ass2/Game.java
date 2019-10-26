@@ -238,9 +238,15 @@ public class Game
             System.out.println("this buffer is full, you cannot split to this");
         } else
         {
-            buffer.getMultiples().add(new Multiple(gameTotal));
-            System.out.println("split complete!");
-            splitSuccess = true;
+            splitSuccess = buffer.addMultipleToBuffer(new Multiple(gameTotal));
+            if (splitSuccess)
+            {
+                System.out.println("split complete!");
+            } else
+            {
+                System.out.println("split error, the buffer may be full");
+            }
+
         }
         return splitSuccess;
     }
@@ -321,7 +327,7 @@ public class Game
             if (!buffer.isEmpty())
             {
                 listIsAllEmpty = false;
-                maxSize = Math.max(maxSize, buffer.getMultiples().size()); //ensure the max number of size in buffers.
+                maxSize = Math.max(maxSize, buffer.getCurrentSize()); //ensure the max number of size in buffers.
             }
         }
         if (listIsAllEmpty)
@@ -335,8 +341,8 @@ public class Game
         Buffer right = multipleList.get(1);
         for (int i = 0; i < maxSize; i++) //The times for looping is decided by the buffer that has a higher amount of Multiple objects.
         {
-            String leftValue = "" + (i < left.getMultiples().size() ? left.displayBuffer(i) : ""); //If the current index is out of bound, then this line will show an empty String.
-            String rightValue = "" + (i < right.getMultiples().size() ? right.displayBuffer(i) : ""); //If the current index is out of bound, then this line will show an empty String.
+            String leftValue = "" + (i < left.getCurrentSize() ? left.displayBuffer(i) : ""); //If the current index is out of bound, then this line will show an empty String.
+            String rightValue = "" + (i < right.getCurrentSize() ? right.displayBuffer(i) : ""); //If the current index is out of bound, then this line will show an empty String.
             String totalValue = "";
             if (i == maxSize / 2) //If there is the centre of the loop, then show the number of the game total.
             {
@@ -345,7 +351,7 @@ public class Game
             System.out.println(String.format(format, leftValue, totalValue, rightValue));
         }
         System.out.println(String.format(format, "-----------------", "-----", "-----------------"));
-        System.out.println(String.format(format,"Buffer left remain: "+left.getRemainCapacity(),"","Buffer right remain: "+right.getRemainCapacity()));
+        System.out.println(String.format(format, "Buffer left remain: " + left.getRemainCapacity(), "", "Buffer right remain: " + right.getRemainCapacity()));
     }
 
     /**

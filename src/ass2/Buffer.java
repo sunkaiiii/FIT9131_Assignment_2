@@ -57,15 +57,24 @@ public class Buffer
         return multiples;
     }
 
+    /**
+     * init the buffer, drop all elements in the buffer
+     */
     public void initBufferValues()
     {
         multiples.clear();
     }
 
+    /**
+     * try to add an element to the buffer
+     *
+     * @param newMultiple new multiple need to be added
+     * @return true is the element has been added correctly, false is adding error.
+     */
     public boolean addMultipleToBuffer(Multiple newMultiple)
     {
         boolean result = false;
-        if (multiples.size() < maxElements)
+        if (newMultiple != null && getMultiples().size() < maxElements)
         {
             multiples.add(newMultiple);
             result = true;
@@ -73,6 +82,12 @@ public class Buffer
         return result;
     }
 
+    /**
+     * remove a current exist multiple object from the buffer
+     *
+     * @param existMultiple the object of the exist multiple
+     * @return true is the removing action success, false is the removing error.
+     */
     public boolean removeMultipleFromBuffer(Multiple existMultiple)
     {
         return multiples.remove(existMultiple);
@@ -110,6 +125,7 @@ public class Buffer
 
     /**
      * Display the whole information in the ArrayList
+     *
      * @return A string contains all information in the ArrayList
      */
     public String displayBuffer()
@@ -124,28 +140,45 @@ public class Buffer
 
     /**
      * Display the specific information of the buffer in the ArrayList
+     *
      * @param index the index of the current ArrayList in the Buffer.
      * @return the information in the specific index of the Buffer if the index is correct, otherwise, return Unknown
      */
     public String displayBuffer(int index)
     {
         final String result;
-        if (index>=multiples.size() || index < 0)
+        if (index >= multiples.size() || index < 0)
         {
             result = "Unknown";
-        }else
+        } else
         {
-            result = multiples.get(index).displayMultiple()+" ";
+            result = multiples.get(index).displayMultiple() + " ";
         }
         return result;
     }
 
     /**
      * Get the current remain capacity of the Buffer
+     *
      * @return the number of the remain available capacity.
      */
     public int getRemainCapacity()
     {
-        return getMaxElements()-getMultiples().size();
+        int remainCapacity = getMaxElements() - getMultiples().size();
+        if (remainCapacity < 0)
+        {
+            remainCapacity = 0;
+        }
+        return getMaxElements() - getMultiples().size();
+    }
+
+    /**
+     * Get the current size of the buffer
+     *
+     * @return the number of the current size of the buffer
+     */
+    public int getCurrentSize()
+    {
+        return getMultiples().size();
     }
 }

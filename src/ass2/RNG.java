@@ -16,8 +16,9 @@ public class RNG
      */
     public RNG()
     {
-        this(0,1);
+        this(0, 1);
     }
+
     /**
      * non-default constructor
      *
@@ -32,6 +33,7 @@ public class RNG
 
     /**
      * The accessor of the max value
+     *
      * @return the max value
      */
     public int getMaximumValue()
@@ -41,6 +43,7 @@ public class RNG
 
     /**
      * The mutator of the max value
+     *
      * @param newMaximumValue The new max value
      */
     public void setMaximumValue(int newMaximumValue)
@@ -50,6 +53,7 @@ public class RNG
 
     /**
      * The accessor of the min value
+     *
      * @return The min value
      */
     public int getMinimumValue()
@@ -59,6 +63,7 @@ public class RNG
 
     /**
      * The mutator of the min value
+     *
      * @param newMinimumValue The new min value
      */
     public void setMinimumValue(int newMinimumValue)
@@ -68,6 +73,7 @@ public class RNG
 
     /**
      * Get a random index depended on the fields.
+     *
      * @return return a int between the min number and max number.
      */
     public int getAValidIndex()

@@ -30,6 +30,7 @@ public class Input
 
     /**
      * Get a integer from the user input
+     *
      * @param displayMessage The notification that the user knows
      * @return An integer
      * @throws NumberFormatException if the user inputs wrong characters which not belong to a number. Throw a NumberFormatException.
