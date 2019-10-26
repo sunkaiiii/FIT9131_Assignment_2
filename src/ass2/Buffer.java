@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Buffer
 {
-    private ArrayList<Multiple> multiples;
+    private ArrayList<Multiple> multiples;ge
     private int maxElements;
 
     /**
@@ -167,7 +167,7 @@ public class Buffer
         int remainCapacity = getMaxElements() - getMultiples().size();
         if (remainCapacity < 0)
             remainCapacity = 0;
-        return getMaxElements() - getMultiples().size();
+        return remainCapacity;
     }
 
     /**
