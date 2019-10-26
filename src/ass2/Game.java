@@ -125,6 +125,7 @@ public class Game
                         System.out.println("you must choose a number between 1 and 4!");
                         break;
                 }
+            }
         }
 
         //If user wins a game, then write the final result to a file.
@@ -289,20 +290,20 @@ public class Game
                     }
                     candidateArrays.add(multipleList); //build the whole batch of multiples' list
                 }
-                System.out.println("Please choose a multiple:");
-                for (int i = 0; i < candidateArrays.size(); i++)
-                {
-                    StringBuffer outInformation = new StringBuffer().append(i + 1).append(": ");
-                    for (Multiple number : candidateArrays.get(i))
-                    {
-                        outInformation.append(number.getValue()).append(",");
-                    }
-                    outInformation.delete(outInformation.length() - 1, outInformation.length()); //delete the comma after the last of the element in the list.
-                    System.out.println(outInformation.toString());
-                }
                 int inputNumber;
                 do
                 {
+                    System.out.println("Please choose a multiple:");
+                    for (int i = 0; i < candidateArrays.size(); i++)
+                    {
+                        StringBuffer outInformation = new StringBuffer().append(i + 1).append(": ");
+                        for (Multiple number : candidateArrays.get(i))
+                        {
+                            outInformation.append(number.getValue()).append(",");
+                        }
+                        outInformation.delete(outInformation.length() - 1, outInformation.length()); //delete the comma after the last of the element in the list.
+                        System.out.println(outInformation.toString());
+                    }
                     try
                     {
                         inputNumber = new Input().acceptNumericInput("select: ");
