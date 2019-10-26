@@ -1,45 +1,110 @@
 package ass2;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+/**
+ * The FileIO class responses for reading or writing information from or to a file.
+ *
+ * @author Kai.Sun
+ * @version 14/10/2019
+ */
 
 public class FileIO
 {
-    private String fileName;
+    private final String filename;
 
+    /**
+     * Default constructor
+     */
     public FileIO()
     {
-        this("known");
+        this("unknown");
     }
 
-    public FileIO(String newFileName)
+    /**
+     * Non-default constructor
+     *
+     * @param newInputFilename the name of the file that wants the FileIO object  to use
+     */
+    public FileIO(String newInputFilename)
     {
-        fileName = newFileName;
+        filename = newInputFilename;
     }
 
-    public ArrayList<Integer> readMultipleFromFiles() throws IOException, NumberFormatException
+    /**
+     * The accessor of the file name
+     *
+     * @return the filename
+     */
+    public String getFilename()
     {
-        try (FileReader fileReader = new FileReader(fileName))
+        return filename;
+    }
+
+    /**
+     * Read the content in the file as a String object.
+     *
+     * @return the content in the file, if errors are happened, return an empty String
+     */
+    public String readMultipleFromFiles()
+    {
+        String result = "";
+        try
         {
-            Scanner scanner = new Scanner(fileReader);
-            String[] numberArray = scanner.nextLine().split(",");
-            ArrayList<Integer> result = new ArrayList<>();
-            for (String singleNum : numberArray)
+            FileReader fileReader = new FileReader(filename);
+            try
             {
-                result.add(Integer.parseInt(singleNum));
+                StringBuffer stringBuffer = new StringBuffer();
+                Scanner scanner = new Scanner(fileReader);
+                while (scanner.hasNextLine())
+                {
+                    stringBuffer.append(scanner.nextLine()).append("\n");
+                }
+                stringBuffer.delete(stringBuffer.length() - 1, stringBuffer.length());
+                result = stringBuffer.toString();
+            } finally
+            {
+                fileReader.close();
             }
-            return result;
+        } catch (FileNotFoundException e)
+        {
+            System.out.println("There is no such file called " + filename);
+        } catch (IOException e)
+        {
+            System.out.println("read " + filename + " error!!!");
+        } catch (NumberFormatException e)
+        {
+            System.out.println("content in file " + filename + " is error");
         }
+        return result;
     }
 
-    public void writeFinalResultToFile(String writeInformation)throws IOException
+    /**
+     * Write information to the file
+     *
+     * @param writeInformation the content that wants the FileIO object to write
+     */
+    public void writeContentToFile(String writeInformation)
     {
-        try(PrintWriter printWriter=new PrintWriter(fileName))
+        try
         {
-            printWriter.println(writeInformation);
+            PrintWriter printWriter = new PrintWriter(filename);
+            try
+            {
+                printWriter.println(writeInformation);
+            } finally
+            {
+                printWriter.close();
+            }
+        } catch (Exception e)
+        {
+            System.out.println("cannot write to file called " + filename);
         }
     }
 }

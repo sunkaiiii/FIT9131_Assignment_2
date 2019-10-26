@@ -2,15 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45dd962a-b918-4059-a52a-67213cd44f9a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ass2/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Buffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ass2/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/FileIO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ass2/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ass2/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ass2/Multiple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ass2/Multiple.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -21,6 +41,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectId" id="1Riy80eiAOPZUH6R2OTNK9YNc6H" />
   <component name="PropertiesComponent">
@@ -28,11 +49,21 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ass2" />
       <recent name="C:\Users\sunkai\Documents\GitHub\Ass2\src\ass2" />
       <recent name="C:\Users\sunkai\Documents\GitHub\Ass2\src" />
     </key>
@@ -82,6 +113,12 @@
       <workItem from="1570594010184" duration="870000" />
       <workItem from="1570596581196" duration="319000" />
       <workItem from="1570610333920" duration="668000" />
+      <workItem from="1570854547359" duration="4525000" />
+      <workItem from="1571801283160" duration="1879000" />
+      <workItem from="1571818190795" duration="854000" />
+      <workItem from="1572090107250" duration="490000" />
+      <workItem from="1572092615263" duration="2866000" />
+      <workItem from="1572095693118" duration="3965000" />
     </task>
     <servers />
   </component>
