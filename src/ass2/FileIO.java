@@ -57,7 +57,6 @@ public class FileIO
         String result = "";
         try
         {
-            System.out.println(Paths.get("").toAbsolutePath());
             FileReader fileReader = new FileReader(filename);
             try
             {

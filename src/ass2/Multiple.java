@@ -4,7 +4,7 @@ package ass2;
  * Multiple stores the value for a game.
  *
  * @author Kai.Sun
- * @version 23/10/2019
+ * @version 26/10/2019
  */
 public class Multiple
 {
@@ -16,9 +16,11 @@ public class Multiple
      *
      * @param newValue the initial value of the multiple object
      */
-    public Multiple(int newValue)
+    public Multiple(int newValue) throws Exception
     {
-        this.value = newValue;
+        if (newValue <= 0)
+            throw new Exception("The value of a multiple object cannot be less 0");
+        value = newValue;
     }
 
     /**
@@ -26,8 +28,10 @@ public class Multiple
      *
      * @param newValue The new value
      */
-    public void setValue(int newValue)
+    public void setValue(int newValue) throws Exception
     {
+        if (newValue <= 0)
+            throw new Exception("The value of a multiple object cannot be less 0");
         this.value = newValue;
     }
 

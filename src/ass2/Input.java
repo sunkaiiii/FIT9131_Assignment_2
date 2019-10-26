@@ -2,7 +2,6 @@ package ass2;
 
 import java.util.Scanner;
 
-
 /**
  * Input Class which creates a scanner object and accept input from the user
  * in different formats
@@ -14,6 +13,13 @@ public class Input
 {
 
     /**
+     * The default constructor
+     */
+    public Input()
+    {
+    }
+
+    /**
      * Method which displays a message to the user to enter an DOUBLE input
      * which is read from the keyboard using the Scanner object and then passed
      * to the calling method
@@ -23,6 +29,7 @@ public class Input
      */
     public String acceptUserInput(String displayMessage)
     {
+        System.out.println(displayMessage);
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         return userInput.trim();
