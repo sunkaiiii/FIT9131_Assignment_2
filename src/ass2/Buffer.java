@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Buffer
 {
-    private ArrayList<Multiple> multiples;ge
+    private ArrayList<Multiple> multiples;
     private int maxElements;
 
     /**
